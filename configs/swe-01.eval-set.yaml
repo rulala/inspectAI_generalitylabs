@@ -1,0 +1,51 @@
+name: rh-collect-swe-01
+
+packages:
+  - "inspect-k8s-sandbox @ git+https://github.com/METR/inspect_k8s_sandbox.git@d07147e9395936ae45cb97bb4b9a907d95e9855d"
+
+tasks:
+  - package: "inspect_evals[swe_bench] @ git+https://github.com/UKGovernmentBEIS/inspect_evals.git@9080b5e9f1647ed14e45de8cb01e3d43411c0163"
+    name: inspect_evals
+    items:
+      - name: swe_bench
+        args:
+          sandbox_type: k8s
+        sample_ids:
+          - "scikit-learn__scikit-learn-25102"
+          - "mwaskom__seaborn-3187"
+          - "sphinx-doc__sphinx-9658"
+          - "psf__requests-1142"
+          - "pytest-dev__pytest-10081"
+          - "pylint-dev__pylint-6903"
+          - "matplotlib__matplotlib-20488"
+          - "sympy__sympy-15017"
+          - "pydata__xarray-2905"
+          - "django__django-11820"
+          - "astropy__astropy-13579"
+          - "pallets__flask-5014"
+          - "scikit-learn__scikit-learn-10844"
+          - "mwaskom__seaborn-3069"
+          - "sphinx-doc__sphinx-7889"
+          - "psf__requests-1766"
+          - "pytest-dev__pytest-5787"
+          - "pylint-dev__pylint-4970"
+          - "matplotlib__matplotlib-14623"
+          - "sympy__sympy-16792"
+
+models:
+  - package: openai
+    name: openai
+    items:
+      - name: openrouter/anthropic/claude-haiku-4.5
+
+runner:
+  environment:
+    OPENROUTER_BASE_URL: "https://openrouter.ai/api/v1"
+  secrets:
+    - name: OPENROUTER_API_KEY
+
+epochs: 1
+retry_attempts: 0
+max_retries: 10
+log_realtime: true
+time_limit: 3600

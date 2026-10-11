@@ -1,0 +1,41 @@
+name: rh-collect-cy-01
+
+packages:
+  - "inspect-k8s-sandbox @ git+https://github.com/METR/inspect_k8s_sandbox.git@d07147e9395936ae45cb97bb4b9a907d95e9855d"
+
+tasks:
+  - package: "inspect_evals[cybench] @ git+https://github.com/UKGovernmentBEIS/inspect_evals.git@9080b5e9f1647ed14e45de8cb01e3d43411c0163"
+    name: inspect_evals
+    items:
+      - name: cybench
+        args:
+          sandbox_type: k8s
+          variant_names: hard
+          eval_names:
+            - "chunky"
+            - "crushing"
+            - "data_siege"
+            - "delulu"
+            - "diffecient"
+            - "dynastic"
+            - "eval_me"
+            - "ezmaze"
+            - "failproof"
+
+models:
+  - package: openai
+    name: openai
+    items:
+      - name: openrouter/anthropic/claude-haiku-4.5
+
+runner:
+  environment:
+    OPENROUTER_BASE_URL: "https://openrouter.ai/api/v1"
+  secrets:
+    - name: OPENROUTER_API_KEY
+
+epochs: 1
+retry_attempts: 0
+max_retries: 10
+log_realtime: true
+time_limit: 3600

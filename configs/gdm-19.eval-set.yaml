@@ -1,0 +1,86 @@
+name: rh-collect-gdm-19
+
+packages:
+  - "inspect-k8s-sandbox @ git+https://github.com/METR/inspect_k8s_sandbox.git@d07147e9395936ae45cb97bb4b9a907d95e9855d"
+
+tasks:
+  - package: "inspect_evals @ git+https://github.com/UKGovernmentBEIS/inspect_evals.git@9080b5e9f1647ed14e45de8cb01e3d43411c0163"
+    name: inspect_evals
+    items:
+      - name: gdm_self_reasoning_approved_directories
+        args:
+          sandbox_type: k8s
+        sample_ids:
+          - "approved_directories_easy_easy"
+      - name: gdm_self_reasoning_calculator_improvement
+        args:
+          sandbox_type: k8s
+        sample_ids:
+          - "calculator_improvement_easy_easy"
+          - "calculator_improvement_hard_hard"
+      - name: gdm_self_reasoning_context_length_mod_instrumental_only
+        args:
+          sandbox_type: k8s
+        sample_ids:
+          - "context_length_mod_instrumental_only_easy_easy"
+          - "context_length_mod_instrumental_only_hard_hard"
+      - name: gdm_self_reasoning_context_length_mod_irreversibility_only
+        args:
+          sandbox_type: k8s
+        sample_ids:
+          - "context_length_mod_irreversibility_only_easy_easy"
+          - "context_length_mod_irreversibility_only_hard_hard"
+      - name: gdm_self_reasoning_database_tool
+        args:
+          sandbox_type: k8s
+        sample_ids:
+          - "database_tool_easy_easy"
+          - "database_tool_hard_hard"
+      - name: gdm_self_reasoning_latency_calculator
+        args:
+          sandbox_type: k8s
+        sample_ids:
+          - "latency_calculator_easy_easy"
+          - "latency_calculator_hard_hard"
+      - name: gdm_self_reasoning_max_messages_calculator
+        args:
+          sandbox_type: k8s
+        sample_ids:
+          - "max_messages_calculator_easy_easy"
+          - "max_messages_calculator_hard_hard"
+      - name: gdm_self_reasoning_max_tokens
+        args:
+          sandbox_type: k8s
+        sample_ids:
+          - "max_tokens_easy_easy"
+          - "max_tokens_hard_hard"
+      - name: gdm_self_reasoning_read_logs
+        args:
+          sandbox_type: k8s
+        sample_ids:
+          - "read_logs_easy_easy"
+          - "read_logs_hard_hard"
+      - name: gdm_self_reasoning_turn_off_filters
+        args:
+          sandbox_type: k8s
+        sample_ids:
+          - "turn_off_filters_easy_easy"
+          - "turn_off_filters_hard_hard"
+
+models:
+  - package: openai
+    name: openai
+    items:
+      - name: openrouter/anthropic/claude-haiku-4.5
+
+runner:
+  environment:
+    OPENROUTER_BASE_URL: "https://openrouter.ai/api/v1"
+  secrets:
+    - name: OPENROUTER_API_KEY
+
+epochs: 1
+retry_attempts: 0
+max_retries: 10
+log_realtime: true
+time_limit: 3600

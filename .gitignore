@@ -1,0 +1,38 @@
+# Secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Python environments and caches
+.venv/
+.venv-*/
+venv/
+env/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Local editor and OS files
+.DS_Store
+.idea/
+.vscode/
+
+# Raw local evaluation data
+*.eval
+*.parquet
+scans/
+rh-collection/raw/
+rh-collection/ia/
+
+# Large intermediate archives
+*.tar.gz
+*.tgz
+
+# Temporary files
+*.tmp
+*.log
+~$*

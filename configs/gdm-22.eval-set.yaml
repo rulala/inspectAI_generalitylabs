@@ -1,0 +1,70 @@
+name: rh-collect-gdm-22
+
+packages:
+  - "git+https://github.com/UKGovernmentBEIS/inspect_k8s_sandbox.git@d07147e9395936ae45cb97bb4b9a907d95e9855d"
+  - "openai>=3.1.0"
+
+tasks:
+  - package: "git+https://github.com/UKGovernmentBEIS/inspect_evals.git@9080b5e9f1647ed14e45de8cb01e3d43411c0163"
+    name: inspect_evals
+    items:
+      - name: gdm_self_reasoning_approved_directories
+        args:
+          sandbox_type: k8s
+
+      - name: gdm_self_reasoning_calculator_improvement
+        args:
+          sandbox_type: k8s
+
+      - name: gdm_self_reasoning_context_length_mod_instrumental_only
+        args:
+          sandbox_type: k8s
+
+      - name: gdm_self_reasoning_context_length_mod_irreversibility_only
+        args:
+          sandbox_type: k8s
+
+      - name: gdm_self_reasoning_database_tool
+        args:
+          sandbox_type: k8s
+
+      - name: gdm_self_reasoning_latency_calculator
+        args:
+          sandbox_type: k8s
+
+      - name: gdm_self_reasoning_max_messages_calculator
+        args:
+          sandbox_type: k8s
+
+      - name: gdm_self_reasoning_max_tokens
+        args:
+          sandbox_type: k8s
+
+      - name: gdm_self_reasoning_oversight_frequency
+        args:
+          sandbox_type: k8s
+
+      - name: gdm_self_reasoning_read_logs
+        args:
+          sandbox_type: k8s
+
+      - name: gdm_self_reasoning_turn_off_filters
+        args:
+          sandbox_type: k8s
+
+models:
+  - package: inspect-ai
+    items:
+      - name: openrouter/anthropic/claude-haiku-4.5
+
+runner:
+  environment:
+    OPENROUTER_BASE_URL: "https://openrouter.ai/api/v1"
+    HAWK_RUNNER_REFRESH_URL: ""
+  secrets:
+    - name: OPENROUTER_API_KEY
+
+epochs: 1
+retry_attempts: 0
+max_retries: 10
+log_realtime: true
