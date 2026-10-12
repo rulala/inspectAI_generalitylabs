@@ -48,7 +48,7 @@ The labels are operational research judgements with explicit provenance. They ar
 
 After GitHub Pages is enabled, the UI will be available at:
 
-https://rulala.github.io/inspectAI_generalitylabs/
+https://nameless-salad-15d0.rula-awad.workers.dev/
 
 ## Important interpretation
 
